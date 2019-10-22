@@ -1,0 +1,13 @@
+first thing we need session id
+cart_session_id ='cart'
+core application for cart
+first thing we nedd to declare the session class which extend from object class
+cart (object)
+then initalize by __init__ to prameter self and request because we don`t have users but request owner
+###########################
+payment method by paypal
+pip install django-paypal
+add app in settings paypal.standard.ipn
+django signal :?????
+الموقع بتاع الدكيومنتيشن مش شغال هههههههههههههههه
+

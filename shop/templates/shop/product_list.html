@@ -1,0 +1,62 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block title%}
+{%if category%}
+{{category.name}}
+{%else%}
+products
+{%endif%}
+{%endblock%}
+{%block content%}
+ <div id="sidebar">
+     <ul>
+         <h2>categories</h2>
+
+        <li  {%if not category%} class="selected"{%endif%}>
+         <a   href="{%url 'product_list'%}">All</a>
+        </li>
+     </ul>
+     {%for cat in categories%}
+     <ul>
+
+         <li  {%if category.slug == cat.slug%} class="selected"
+             {%endif%} >
+             <a {%if category.slug == cat.slug%} style="color:#fff;"
+             {%endif%}    href="{{cat.get_absolute_url}}">{{cat.name}}</a>
+
+         </li>
+
+     </ul>
+     {%empty%}
+         <h2>No category exists yet</h2>
+         {%endfor%}
+
+ </div>
+<div id="main">
+    <h1>
+			{% if category %}
+				{{category.name}}
+			{% else %}
+				Products
+			{% endif %}
+		</h1>
+        {% for prod in products %}
+	     <div class="card" style="width:144px; height:384px;">
+  <img src="{% if prod.Image %}
+								{{prod.Image.url}}
+							{% else %}
+								{% static 'images/default.png' %}
+							{% endif %}"
+						width="150px" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{prod.name}}</h5>
+
+    <p class="card-text">{{prod.description}}</p>
+    <h5>{{prod.price}}</h5>
+      <a href="{{prod.get_absolute_url}}" class="btn btn-primary">Buy Now</a>
+  </div>
+</div>
+
+    {%endfor%}
+</div>
+{%endblock%}
